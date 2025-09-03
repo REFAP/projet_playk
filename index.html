@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PlayK × La Bergerie — Réunion Kick‑off (présentation interactive)</title>
+  <meta name="description" content="Deck interactif pour cadrer le projet PlayK × La Bergerie : vision, objectifs, rôles, calendrier et plan d'action."/>
+  <style>
+    :root{
+      --bg:#0b0f14;          /* noir bleu nuit */
+      --panel:#0f172a;       /* ardoise */
+      --fg:#e5e7eb;          /* texte clair */
+      --muted:#94a3b8;       /* gris doux */
+      --accent:#d4af37;      /* or chic */
+      --glacier:#8ecae6;     /* bleu glacier */
+      --wine:#8b183a;        /* rouge vin */
+      --ok:#10b981;          /* vert ok */
+      --warn:#f59e0b;        /* amber */
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; background:radial-gradient(1200px 600px at 70% -10%, rgba(212,175,55,.08), transparent 60%), var(--bg);
+      color:var(--fg); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    header{
+      position:fixed; inset:0 0 auto 0; height:64px; display:flex; align-items:center; gap:16px; padding:12px 20px; z-index:10;
+      background:linear-gradient(to bottom, rgba(11,15,20,.9), rgba(11,15,20,.6)); backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(212,175,55,.15);
+    }
+    header .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.2px;}
+    header .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 24px rgba(212,175,55,.5)}
+    header small{color:var(--muted)}
+
+    .progress{flex:1; height:6px; background:#0b1220; border-radius:999px; overflow:hidden;}
+    .progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--glacier));transition:width .35s ease;}
+
+    main{height:100%; display:grid; place-items:center; padding:80px 16px 96px;}
+    .deck{width:min(1100px, 95vw); aspect-ratio: 16/9; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00)); border:1px solid rgba(148,163,184,.15); border-radius:24px; box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04); position:relative; overflow:hidden;}
+    .slide{position:absolute; inset:0; padding:36px 42px; display:flex; flex-direction:column; gap:16px; opacity:0; transform:translateX(30px) scale(.98); transition:.45s cubic-bezier(.2,.7,.2,1); overflow:auto;}
+    .slide.active{opacity:1; transform:none;}
+    .h1{font-size: clamp(28px, 4.5vw, 44px); line-height:1.15; font-weight:900; letter-spacing:.2px;}
+    .h2{font-size: clamp(20px, 2.6vw, 28px); font-weight:800; color:#e7ecef;}
+    .pill{display:inline-flex; align-items:center; gap:10px; padding:6px 12px; border:1px solid rgba(212,175,55,.35); color:var(--accent); border-radius:999px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; font-size:12px;}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:14px;}
+    .grid.cols-2{grid-template-columns: repeat(2, 1fr);} 
+    .grid.cols-3{grid-template-columns: repeat(3, 1fr);} 
+    .grid.cols-4{grid-template-columns: repeat(4, 1fr);} 
+    @media(max-width:920px){.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}.deck{aspect-ratio:auto; min-height:70vh}}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border:1px solid rgba(148,163,184,.18); border-radius:18px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.25);}
+    .card h3{margin:.2rem 0 .4rem; font-size: clamp(16px, 2vw, 20px);}
+    .card p{margin:.25rem 0; color:var(--muted)}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border-radius:999px;font-weight:700;font-size:12px}
+    .badge.gold{background:rgba(212,175,55,.12); color:var(--accent); border:1px solid rgba(212,175,55,.35)}
+    .badge.ice{background:rgba(142,202,230,.12); color:var(--glacier); border:1px solid rgba(142,202,230,.35)}
+
+    ul.clean{list-style:none; padding-left:0; margin:0}
+    ul.clean li{padding:8px 0; display:flex; gap:10px; align-items:flex-start;}
+    ul.clean li i{margin-top:3px; width:8px; height:8px; border-radius:2px; background:linear-gradient(90deg,var(--accent),var(--glacier)); flex:0 0 8px; box-shadow:0 0 12px rgba(212,175,55,.5)}
+
+    /* Timeline */
+    .timeline{display:grid; gap:12px; grid-template-columns:repeat(4,minmax(0,1fr));}
+    .timeline .col{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border:1px solid rgba(148,163,184,.18); border-radius:14px; padding:12px;}
+    .timeline h4{margin:.4rem 0; font-size:15px}
+    .task{display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:start; padding:6px 0;}
+    .task input[type="checkbox"]{margin-top:4px; width:18px; height:18px}
+    .task small{color:var(--muted)}
+
+    /* Footer nav */
+    .nav{position:fixed; inset:auto 0 12px 0; display:flex; justify-content:center; gap:12px; z-index:20}
+    .nav button{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); color:var(--fg); border:1px solid rgba(148,163,184,.2); border-radius:14px; padding:12px 14px; font-weight:800; letter-spacing:.3px; cursor:pointer; backdrop-filter: blur(6px);} 
+    .nav button:hover{border-color:rgba(212,175,55,.4)}
+
+    .toolbar{position:absolute; inset:auto 16px 16px auto; display:flex; gap:8px}
+    .toolbar .chip{background:rgba(255,255,255,.06); border:1px solid rgba(148,163,184,.2); padding:6px 10px; border-radius:999px; color:var(--muted); font-weight:700; font-size:12px}
+
+    .inputs{display:flex; flex-wrap:wrap; gap:10px; margin:.4rem 0 0}
+    .inputs input, .inputs select, .inputs button{background:#0b1220; color:var(--fg); border:1px solid rgba(148,163,184,.25); border-radius:10px; padding:8px 10px; font-weight:600}
+    .inputs button{cursor:pointer}
+
+    /* Print */
+    @media print{
+      header,.nav,.toolbar{display:none !important}
+      body{background:#fff; color:#111}
+      .deck{width:100%; aspect-ratio:auto; box-shadow:none; border:none}
+      .slide{position:relative; opacity:1; transform:none; page-break-after:always}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand"><span class="dot"></span><div>PlayK × La Bergerie — <small class="muted">Réunion Kick‑off</small></div></div>
+    <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+    <div class="muted" id="today"></div>
+  </header>
+
+  <main>
+    <div class="deck" role="region" aria-label="Deck de présentation">
+      <!-- SLIDE 1: Titre -->
+      <section class="slide active" data-slide="1">
+        <span class="pill">Présentation interactive</span>
+        <div class="h1">PlayK × La Bergerie<br><span class="muted">Kick‑off & plan d’action</span></div>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Objectif de la session</h3>
+            <ul class="clean">
+              <li><i></i><span>Aligner la vision et les attentes.</span></li>
+              <li><i></i><span>Proposer une répartition des rôles.</span></li>
+              <li><i></i><span>Valider un calendrier réaliste et ambitieux.</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Mode d’emploi</h3>
+            <ul class="clean">
+              <li><i></i><span>Navigation <b>← / →</b> ou clic sur <b>Suivant</b>.</span></li>
+              <li><i></i><span>Champs interactifs : noms, dates, cases à cocher.</span></li>
+              <li><i></i><span><b>Imprimer</b> via <code>Ctrl/Cmd + P</code> (format A4, 1 slide/page).</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="toolbar">
+          <span class="chip">Astuce : Espace = slide suivante</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: Vision -->
+      <section class="slide" data-slide="2">
+        <span class="pill">Vision</span>
+        <div class="h1">PlayK n’est pas un jouet<br><span class="muted">Une œuvre pop/street art pour un lieu chic de montagne</span></div>
+        <div class="grid cols-3">
+          <div class="card"><span class="badge gold">Fer de lance</span>
+            <h3>La Bergerie = vitrine</h3>
+            <p>Première installation réelle → rampe de lancement pour la marque.</p>
+          </div>
+          <div class="card"><span class="badge ice">Collection</span>
+            <h3>Œuvres individuelles + 1 pièce commune</h3>
+            <p>Chaque membre termine 1 PlayK + réalisation collective La Bergerie.</p>
+          </div>
+          <div class="card"><span class="badge gold">Qualité</span>
+            <h3>Exigence & cohérence</h3>
+            <p>Matériaux, finitions, images et récit au niveau « chic/luxe ».</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: Objectifs communs -->
+      <section class="slide" data-slide="3">
+        <span class="pill">Objectifs proposés</span>
+        <div class="h1">Ce qu’on vise d’ici 4 semaines</div>
+        <ul class="clean">
+          <li><i></i><span><b>PlayK La Bergerie</b> : design final + réalisation physique (création commune).</span></li>
+          <li><i></i><span><b>4 PlayK individuels</b> terminés (1 par personne) → mini‑collection prête à présenter.</span></li>
+          <li><i></i><span><b>Landing page</b> dédiée + visuels pro (photos) + <b>3 teasers vidéo</b>.</span></li>
+          <li><i></i><span><b>Lancement</b> réseaux coordonné (Insta/TikTok) + communication locale.</span></li>
+        </ul>
+      </section>
+
+      <!-- SLIDE 4: Rôles (interactif) -->
+      <section class="slide" data-slide="4">
+        <span class="pill">Répartition — proposition</span>
+        <div class="h1">Rôles à tenir<br><span class="muted">(à confirmer ensemble)</span></div>
+        <div class="card">
+          <b>Équipe (noms)</b>
+          <div class="inputs" id="teamInputs">
+            <input placeholder="Membre 1" />
+            <input placeholder="Membre 2" />
+            <input placeholder="Membre 3" />
+            <input placeholder="Membre 4" />
+            <button id="saveTeam">Enregistrer</button>
+          </div>
+          <small class="muted">Astuce : entre les noms, puis « Enregistrer » pour activer les listes ci‑dessous.</small>
+        </div>
+        <div class="grid cols-2" style="margin-top:10px">
+          <div class="card">
+            <h3>Site & partenaires</h3>
+            <p>Landing page, suivi La Bergerie, relation lieu/presses.</p>
+            <div class="inputs"><label>Responsable
+              <select class="owner"></select></label></div>
+          </div>
+          <div class="card">
+            <h3>Photo / Vidéo</h3>
+            <p>Teasers, making‑of, photos officielles, qualité d’image.</p>
+            <div class="inputs"><label>Responsable
+              <select class="owner"></select></label></div>
+          </div>
+          <div class="card">
+            <h3>Réseaux sociaux</h3>
+            <p>Planning éditorial, posts & stories, communauté.</p>
+            <div class="inputs"><label>Responsable
+              <select class="owner"></select></label></div>
+          </div>
+          <div class="card">
+            <h3>Direction artistique</h3>
+            <p>Logos, slogans, motifs montagne, cohérence visuelle.</p>
+            <div class="inputs"><label>Responsable
+              <select class="owner"></select></label></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: Calendrier (interactif) -->
+      <section class="slide" data-slide="5">
+        <span class="pill">Calendrier — proposition</span>
+        <div class="h1">Feuille de route 4 semaines</div>
+        <div class="card">
+          <div class="inputs">
+            <label>Début (lundi)
+              <input type="date" id="startDate" />
+            </label>
+            <button id="todayBtn">Aujourd’hui</button>
+            <small class="muted">Les échéances ci‑dessous se recalculent automatiquement.</small>
+          </div>
+        </div>
+        <div class="timeline" style="margin-top:10px">
+          <div class="col">
+            <h4>Semaine 1 — <span class="muted" id="w1"></span></h4>
+            <label class="task"><input type="checkbox" data-task="choose-variant"><span>Choisir la variante finale <b>PlayK La Bergerie</b>.</span></label>
+            <label class="task"><input type="checkbox" data-task="roles"><span>Répartir les rôles et responsabilités.</span></label>
+            <label class="task"><input type="checkbox" data-task="landing"><span>Créer la <b>landing page</b> (version simple).</span></label>
+          </div>
+          <div class="col">
+            <h4>Semaines 2–3 — <span class="muted" id="w23"></span></h4>
+            <label class="task"><input type="checkbox" data-task="build-bergerie"><span>Réaliser physiquement <b>PlayK La Bergerie</b>.</span></label>
+            <label class="task"><input type="checkbox" data-task="personal"><span>Avancer les <b>PlayK individuels</b> (1 par personne).</span></label>
+            <label class="task"><input type="checkbox" data-task="teasers"><span>Produire <b>3 teasers vidéo</b> (making‑of, détails, reveal).</span></label>
+          </div>
+          <div class="col">
+            <h4>Semaine 4 — <span class="muted" id="w4"></span></h4>
+            <label class="task"><input type="checkbox" data-task="collection"><span>Avoir <b>5 PlayK prêts</b> : 4 individuels + 1 collectif.</span></label>
+            <label class="task"><input type="checkbox" data-task="launch"><span>Lancement réseaux coordonné + mise en ligne page.</span></label>
+            <label class="task"><input type="checkbox" data-task="local"><span>Com’ locale : La Bergerie / presse / bouche‑à‑oreille.</span></label>
+          </div>
+          <div class="col">
+            <h4>Mois 2 — <span class="muted" id="m2"></span></h4>
+            <label class="task"><input type="checkbox" data-task="shooting"><span>Shooting photo & vidéo <b>sur place</b>.</span></label>
+            <label class="task"><input type="checkbox" data-task="campaign"><span>Campagne réseaux coordonnée (stories, reels, collabs).</span></label>
+            <label class="task"><input type="checkbox" data-task="next"><span>Définir la <b>prochaine série</b> (nouveau lieu/collection).</span></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: Livrables -->
+      <section class="slide" data-slide="6">
+        <span class="pill">Livrables</span>
+        <div class="h1">Ce qu’on livre au lancement</div>
+        <div class="grid cols-3">
+          <div class="card"><h3>Pièces</h3>
+            <ul class="clean">
+              <li><i></i><span><b>PlayK La Bergerie</b> (réalisation commune)</span></li>
+              <li><i></i><span><b>4 PlayK individuels</b> (collection)</span></li>
+            </ul>
+          </div>
+          <div class="card"><h3>Contenus</h3>
+            <ul class="clean">
+              <li><i></i><span>3 <b>teasers vidéo</b> + 1 reveal</span></li>
+              <li><i></i><span>10 photos pro (pack presse + réseaux)</span></li>
+            </ul>
+          </div>
+          <div class="card"><h3>Digital</h3>
+            <ul class="clean">
+              <li><i></i><span>Landing page <b>PlayK × La Bergerie</b></span></li>
+              <li><i></i><span>Calendrier éditorial réseaux (2 semaines)</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: Facteurs clés -->
+      <section class="slide" data-slide="7">
+        <span class="pill">Facteurs de succès</span>
+        <div class="h1">Ce qui fera la différence</div>
+        <ul class="clean">
+          <li><i></i><span><b>Discipline</b> : un jalon tenu par personne, chaque semaine.</span></li>
+          <li><i></i><span><b>Qualité</b> : finitions, images, tonalité “chic/luxe”.</span></li>
+          <li><i></i><span><b>Storytelling</b> : une histoire claire (rebelle mais élégante).</span></li>
+          <li><i></i><span><b>Visibilité</b> : teasing régulier, reveal maîtrisé, relais local.</span></li>
+        </ul>
+      </section>
+
+      <!-- SLIDE 8: Prochaines actions -->
+      <section class="slide" data-slide="8">
+        <span class="pill">Clôture</span>
+        <div class="h1">Ce qu’on décide maintenant</div>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Décisions</h3>
+            <ul class="clean">
+              <li><i></i><span>Variante finale PlayK La Bergerie.</span></li>
+              <li><i></i><span>Rôles & responsables.</span></li>
+              <li><i></i><span>Dates clés (S1, S2–3, S4).</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Actions immédiates</h3>
+            <ul class="clean">
+              <li><i></i><span>Lancer la landing page (brouillon).</span></li>
+              <li><i></i><span>Planifier les 3 teasers (scènes, durée, équipe).</span></li>
+              <li><i></i><span>Checklist perso : état d’avancement de chaque PlayK.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="toolbar">
+          <span class="chip">Imprimer → Ctrl/Cmd + P</span>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div class="nav" aria-label="Contrôles">
+    <button id="prev" aria-label="Précédent">← Précédent</button>
+    <button id="next" aria-label="Suivant">Suivant →</button>
+  </div>
+
+  <script>
+    // Helpers
+    const $ = (sel, ctx=document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+    // Slides navigation
+    let idx = 0; // zero-based
+    const slides = $$(".slide");
+    const progress = $("#progress");
+
+    function render(){
+      slides.forEach((s, i)=>{
+        s.classList.toggle('active', i===idx);
+      });
+      const ratio = ((idx+1)/slides.length)*100; progress.style.width = ratio + '%';
+      $("#prev").disabled = idx===0; $("#next").disabled = idx===slides.length-1;
+    }
+    function next(){ if(idx < slides.length-1){ idx++; render(); } }
+    function prev(){ if(idx>0){ idx--; render(); } }
+    $("#next").addEventListener('click', next);
+    $("#prev").addEventListener('click', prev);
+    window.addEventListener('keydown', e=>{
+      if(['ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); next(); }
+      if(['ArrowLeft','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
+    });
+    render();
+
+    // Header date
+    const today = new Date();
+    $("#today").textContent = today.toLocaleDateString('fr-FR', {weekday:'short', day:'2-digit', month:'short'});
+
+    // Team → owners selects
+    const TEAM_KEY = 'playk_team_v1';
+    const CHECKS_KEY = 'playk_checks_v1';
+    const START_KEY = 'playk_start_v1';
+    const OWNER_KEY = 'playk_owner_v1';
+
+    const teamInputs = $$("#teamInputs input");
+    const saveTeamBtn = $("#saveTeam");
+    const ownerSelects = $$("select.owner");
+
+    function loadTeam(){
+      try{ const data = JSON.parse(localStorage.getItem(TEAM_KEY)||'[]');
+        teamInputs.forEach((inp,i)=> inp.value = data[i]||'');
+        return data;
+      }catch{ return []; }
+    }
+    function saveTeam(){
+      const data = teamInputs.map(i=> i.value.trim()).filter(Boolean);
+      localStorage.setItem(TEAM_KEY, JSON.stringify(data));
+      applyOwners(data);
+    }
+    function applyOwners(list){
+      ownerSelects.forEach(sel=>{
+        sel.innerHTML = '<option value="">(à attribuer)</option>' + list.map(n=>`<option>${n}</option>`).join('');
+        const saved = sel.getAttribute('data-owner') || '';
+        if(saved) sel.value = saved;
+      });
+    }
+    saveTeamBtn.addEventListener('click', saveTeam);
+    const initTeam = loadTeam();
+    applyOwners(initTeam);
+
+    // Persist owner choices
+    ownerSelects.forEach(sel=>{
+      sel.addEventListener('change', ()=>{
+        sel.setAttribute('data-owner', sel.value);
+        // persist per index
+        const all = ownerSelects.map(s=> s.getAttribute('data-owner')||'');
+        localStorage.setItem(OWNER_KEY, JSON.stringify(all));
+      });
+    });
+    // restore owners
+    try{
+      const owners = JSON.parse(localStorage.getItem(OWNER_KEY)||'[]');
+      owners.forEach((v,i)=>{ if(ownerSelects[i]) ownerSelects[i].setAttribute('data-owner', v); });
+    }catch{}
+
+    // Checklist persistence
+    const checks = $$('input[type="checkbox"][data-task]');
+    function loadChecks(){
+      try{ const map = JSON.parse(localStorage.getItem(CHECKS_KEY)||'{}');
+        checks.forEach(c=> c.checked = !!map[c.dataset.task]);
+      }catch{}
+    }
+    function saveChecks(){
+      const map = {}; checks.forEach(c=> map[c.dataset.task] = c.checked);
+      localStorage.setItem(CHECKS_KEY, JSON.stringify(map));
+    }
+    checks.forEach(c=> c.addEventListener('change', saveChecks));
+    loadChecks();
+
+    // Start date → compute ranges
+    const startInput = $("#startDate");
+    const w1 = $("#w1"), w23 = $("#w23"), w4 = $("#w4"), m2 = $("#m2");
+
+    function fmt(d){ return d.toLocaleDateString('fr-FR', {day:'2-digit', month:'short'}); }
+    function addDays(d, n){ const x = new Date(d); x.setDate(x.getDate()+n); return x; }
+
+    function computeRanges(){
+      const val = startInput.value; if(!val){ w1.textContent='(date à définir)'; w23.textContent=''; w4.textContent=''; m2.textContent=''; return; }
+      const start = new Date(val+'T00:00:00');
+      const endW1 = addDays(start, 6);
+      const startW23 = addDays(start, 7);
+      const endW23 = addDays(start, 20);
+      const startW4 = addDays(start, 21);
+      const endW4 = addDays(start, 27);
+      const startM2 = addDays(start, 28);
+      const endM2 = addDays(start, 55);
+      w1.textContent = fmt(start)+ ' → ' + fmt(endW1);
+      w23.textContent = fmt(startW23)+ ' → ' + fmt(endW23);
+      w4.textContent = fmt(startW4)+ ' → ' + fmt(endW4);
+      m2.textContent = fmt(startM2)+ ' → ' + fmt(endM2);
+      localStorage.setItem(START_KEY, startInput.value);
+    }
+
+    const todayBtn = $("#todayBtn");
+    todayBtn.addEventListener('click', ()=>{
+      // set to Monday of current week
+      const d = new Date();
+      const day = d.getDay(); // 0=Sun..6=Sat
+      const diff = (day===0? -6 : 1 - day); // go back to Monday
+      d.setDate(d.getDate()+diff);
+      startInput.value = d.toISOString().slice(0,10);
+      computeRanges();
+    });
+
+    // restore start
+    const savedStart = localStorage.getItem(START_KEY);
+    if(savedStart){ startInput.value = savedStart; computeRanges(); }
+
+    startInput.addEventListener('change', computeRanges);
+  </script>
+</body>
+</html>

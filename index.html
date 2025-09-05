@@ -12,38 +12,24 @@
       --ink:#1d1d1f;      /* texte foncé */
       --muted:#6b7177;    /* gris texte */
       --gold:#caa64b;     /* accent or */
-      --terra:#c04e3a;    /* terracotta */
       --line:#e9e4da;     /* bordures douces */
-      --ok:#1ea672;       /* vert */
-      --warn:#f59e0b;     /* amber */
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,"Helvetica Neue",Arial,sans-serif}
     a{color:inherit}
 
     .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
-    header{position:sticky;top:0;z-index:30;background:rgba(250,247,242,.9);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+    header{position:sticky;top:0;background:rgba(250,247,242,.9);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line);z-index:20}
     .nav{display:flex;align-items:center;gap:14px;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
-    .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px rgba(202,166,75,.8)}
+    .brand{font-weight:900;display:flex;gap:8px;align-items:center}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px rgba(202,166,75,.8)}
     .spacer{flex:1}
-    .nav a{padding:8px 10px;border-radius:10px;color:var(--muted);text-decoration:none;border:1px solid transparent}
-    .nav a:hover{border-color:var(--line);color:var(--ink)}
 
-    /* Hero */
-    .hero{padding:36px 0 10px}
-    .kicker{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--gold);color:#7a5b14;border-radius:999px;padding:6px 12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;font-size:12px;background:#fff4d680}
-    h1{font-size:clamp(28px,5vw,56px);line-height:1.1;margin:.5rem 0 .6rem}
-    .lead{color:var(--muted);font-size:clamp(16px,2.2vw,20px);max-width:46ch}
-    .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{border:1px solid var(--ink);background:#fff;color:var(--ink);border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
-    .btn.gold{border-color:var(--gold);background:linear-gradient(180deg,#fff,#fffaf0);}
-    .btn.ghost{border-color:var(--line);color:var(--muted)}
-
-    /* Sections */
     section{padding:28px 0;border-top:1px solid var(--line)}
+    h1{font-size:clamp(28px,5vw,56px);margin:.5rem 0 .6rem;line-height:1.15}
     h2{font-size:clamp(22px,3.4vw,34px);margin:.2rem 0 .8rem}
+    .lead{color:var(--muted);font-size:clamp(16px,2.2vw,20px);max-width:54ch}
+
     .grid{display:grid;gap:16px}
     .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
     .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -51,17 +37,13 @@
     .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.04)}
     .muted{color:var(--muted)}
 
-    /* Checklist */
     .task{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:8px 0;border-bottom:1px dashed var(--line)}
     .task:last-child{border-bottom:none}
-    .task input{width:18px;height:18px}
 
-    /* Timeline columns */
     .timeline{display:grid;gap:12px;grid-template-columns:repeat(4,minmax(0,1fr))}
     .tcol{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px}
     .tcol h4{margin:.2rem 0 .5rem;font-size:14px;color:#5b5344;text-transform:uppercase;letter-spacing:.4px}
 
-    /* Collection grid */
     .gallery{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
     .slot{background:linear-gradient(180deg,#fff,#f8f5ee);border:1px solid var(--line);border-radius:14px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
     .slot b{position:absolute;top:8px;left:10px;color:#9a8c74;font-size:12px}
@@ -70,13 +52,11 @@
 
     footer{padding:28px 0;color:#7a7264}
 
-    /* Responsive */
     @media(max-width:980px){
       .timeline{grid-template-columns:repeat(2,1fr)}
       .gallery{grid-template-columns:repeat(3,1fr)}
     }
     @media(max-width:640px){
-      .nav{gap:8px;flex-wrap:wrap}
       .gallery{grid-template-columns:repeat(2,1fr)}
       .cols-2{grid-template-columns:1fr}
     }
@@ -95,16 +75,17 @@
   </header>
 
   <main class="wrap">
+    <!-- HERO -->
     <section class="hero">
-      <span class="kicker">Lancement • La Bergerie (décembre)</span>
-      <h1>PlayK n’est pas un jouet. <br> PlayK est un manifeste.</h1>
-      <p class="lead">Une figure d’enfance réinventée en art. Libre, anticonformiste, sincère. Notre pièce collective <b>PlayK × La Bergerie</b> sera installée à l’ouverture de la saison. Objectif production : <b>œuvre terminée au 15 novembre</b>.</p>
-      <div class="cta">
-        <button class="btn gold" id="btnNotify">Être prévenu du reveal</button>
-        <button class="btn ghost" id="btnPDF">Télécharger le manifeste (PDF)</button>
+      <h1>PlayK n’est pas un jouet.<br>PlayK est un manifeste.</h1>
+      <p class="lead">Une figure d’enfance réinventée en art. Libre, anticonformiste, sincère. Notre pièce collective <b>PlayK × La Bergerie</b> sera installée à l’ouverture de la saison. Objectif : <b>œuvre terminée au 15 novembre</b>.</p>
+      <div class="card" style="margin-top:14px">
+        <b>Statut projet collectif • PlayK × La Bergerie</b>
+        <p class="muted" style="margin:.4rem 0 0">Commande <b>Playmobil XXL</b> passée le <b>05/09/2025</b>. À la réception : <b>réunion de brainstorming créa</b> pour lancer la réalisation collective.</p>
       </div>
     </section>
 
+    <!-- MANIFESTE -->
     <section id="manifeste">
       <h2>Manifeste</h2>
       <div class="grid cols-2">
@@ -113,21 +94,23 @@
           <p class="muted">Slogan : <b>NOT A TOY</b> • Mantra : <b>Un phénomène en route</b></p>
         </div>
         <div class="card">
-          <b>Œuvre collective : PlayK La Bergerie</b>
-          <div class="task"><input type="checkbox" id="v1"><label for="v1">Design final validé (typographie montagne + chic/street)</label></div>
-          <div class="task"><input type="checkbox" id="v2"><label for="v2">Fabrication & finitions (63 cm) — <b>deadline 15 nov.</b></label></div>
-          <div class="task"><input type="checkbox" id="v3"><label for="v3">Plaque / QR + fiche d’authentification</label></div>
-          <div class="task"><input type="checkbox" id="v4"><label for="v4">Installation sur le comptoir (coordonnée avec La Bergerie)</label></div>
+          <b>PlayK La Bergerie (œuvre collective)</b>
+          <label class="task"><input type="checkbox" id="c1"> Commande Playmobil XXL — <b>05/09/2025</b></label>
+          <label class="task"><input type="checkbox" id="c2"> Réception & réunion brainstorming créa</label>
+          <label class="task"><input type="checkbox" id="c3"> Fabrication & finitions (63 cm) — <b>deadline 15 nov.</b></label>
+          <label class="task"><input type="checkbox" id="c4"> Plaque / QR + fiche d’authentification</label>
+          <label class="task"><input type="checkbox" id="c5"> Installation sur le comptoir (La Bergerie)</label>
         </div>
       </div>
     </section>
 
+    <!-- ORGANISATION -->
     <section id="organisation">
       <h2>Organisation & objectif</h2>
       <div class="grid cols-3">
         <div class="card">
           <b>Objectif Lancement</b>
-          <p>Installation <b>début décembre</b> à La Bergerie. Tout doit être prêt <b>au 15 novembre</b> : œuvre, médias, page, graphisme et logistique.</p>
+          <p>Installation <b>début décembre</b> à La Bergerie. Tout doit être prêt <b>au 15 novembre</b> : œuvre collective, médias, page, graphisme et logistique.</p>
         </div>
         <div class="card">
           <b>Rôles clés</b>
@@ -145,12 +128,13 @@
             <li>5 PlayK individuels (collection)</li>
             <li>Landing page + QR codes</li>
             <li>3 teasers vidéo + photos HD</li>
-            <li>Manifeste & dossier presse</li>
+            <li>Manifeste (brouillon 2025)</li>
           </ul>
         </div>
       </div>
     </section>
 
+    <!-- RÉTRO-PLANNING -->
     <section id="retro">
       <h2>Rétro‑planning</h2>
       <div class="timeline">
@@ -159,21 +143,21 @@
           <label class="task"><input type="checkbox" id="r1"> Camille — PlayK #1 terminé</label>
           <label class="task"><input type="checkbox" id="r2"> Elena — PlayK #1 terminé</label>
           <label class="task"><input type="checkbox" id="r3"> William — PlayK #1 terminé</label>
-          <label class="task"><input type="checkbox" id="r4"> Comptes TikTok / Insta / FB ouverts</label>
+          <label class="task"><input type="checkbox" id="r4"> <b>Démarrage PlayK La Bergerie</b> (commande XXL 05/09, attente réception, séance créa)</label>
         </div>
         <div class="tcol">
           <h4>Octobre</h4>
           <label class="task"><input type="checkbox" id="r5"> Logo PlayK finalisé</label>
-          <label class="task"><input type="checkbox" id="r6"> Manifeste rédigé et maquetté (PDF)</label>
-          <label class="task"><input type="checkbox" id="r7"> Landing page en ligne</label>
-          <label class="task"><input type="checkbox" id="r8"> Tournage teasers + shooting photo</label>
-          <label class="task"><input type="checkbox" id="r9"> Dépôt de la marque</label>
+          <label class="task"><input type="checkbox" id="r6"> Manifeste rédigé et maquetté (PDF brouillon)</label>
+          <label class="task"><input type="checkbox" id="r7"> <b>Landing page en ligne</b> <span class="muted">(simultané)</span></label>
+          <label class="task"><input type="checkbox" id="r8"> <b>Comptes TikTok / Insta / FB ouverts</b> <span class="muted">(simultané)</span></label>
+          <label class="task"><input type="checkbox" id="r9"> <b>Tournage teasers + shooting photo</b> <span class="muted">(simultané)</span></label>
         </div>
         <div class="tcol">
           <h4>Novembre (≤ 15)</h4>
           <label class="task"><input type="checkbox" id="r10"> PlayK La Bergerie terminé</label>
           <label class="task"><input type="checkbox" id="r11"> Plaque / QR / fiches d’authenticité</label>
-          <label class="task"><input type="checkbox" id="r12"> Dossier presse prêt + plan reveal</label>
+          <label class="task"><input type="checkbox" id="r12"> <b>Plan de lancement</b> (timing reveal, posts, relais Bergerie)</label>
         </div>
         <div class="tcol">
           <h4>Décembre</h4>
@@ -184,6 +168,7 @@
       </div>
     </section>
 
+    <!-- COLLECTION -->
     <section id="collection">
       <h2>Collection (6 pièces)</h2>
       <div class="gallery">
@@ -194,7 +179,7 @@
         <div class="slot empty"><b>#05</b>À venir</div>
         <div class="slot empty"><b>#06</b>À venir</div>
       </div>
-      <p class="muted" style="margin-top:8px">Astuce : remplacez <code>playk01.jpg</code> et <code>playk02.jpg</code> par vos photos (même dossier), les autres cases resteront en attente.</p>
+      <p class="muted" style="margin-top:8px">Remplacez <code>playk01.jpg</code> et <code>playk02.jpg</code> par vos photos. Les autres cases resteront en attente.</p>
     </section>
 
     <footer>
@@ -206,22 +191,16 @@
   </main>
 
   <script>
-    // Persistance simple des cases à cocher
+    // année footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // persistance des cases à cocher
     const checks = document.querySelectorAll('input[type="checkbox"][id]');
     checks.forEach(ch=>{
       const key = 'playk_check_'+ch.id;
       try{ ch.checked = localStorage.getItem(key)==='1'; }catch{}
-      ch.addEventListener('change', ()=>{
-        localStorage.setItem(key, ch.checked ? '1' : '0');
-      });
+      ch.addEventListener('change', ()=> localStorage.setItem(key, ch.checked ? '1' : '0'));
     });
-
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // CTA placeholders
-    document.getElementById('btnNotify').addEventListener('click', ()=> alert('Merci ! Nous te préviendrons pour le reveal.'));
-    document.getElementById('btnPDF').addEventListener('click', ()=> alert('Le PDF Manifeste sera disponible ici.'));
   </script>
 </body>
 </html>

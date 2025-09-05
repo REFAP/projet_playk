@@ -3,460 +3,291 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PlayK × La Bergerie — Réunion Kick‑off (présentation interactive)</title>
-  <meta name="description" content="Deck interactif pour cadrer le projet PlayK × La Bergerie : vision, objectifs, rôles, calendrier et plan d'action."/>
+  <title>Lancement PlayK — La Bergerie • Décembre</title>
+  <meta name="description" content="Landing page officielle du lancement PlayK : manifeste, collection, calendrier, médias et reveal du premier PlayK installé à La Bergerie.">
+  <meta property="og:title" content="Lancement PlayK — La Bergerie">
+  <meta property="og:description" content="Manifeste, collection, calendrier et reveal de la première installation PlayK à La Bergerie.">
+  <meta property="og:type" content="website">
   <style>
     :root{
-      --bg:#0b0f14;          /* noir bleu nuit */
-      --panel:#0f172a;       /* ardoise */
-      --fg:#e5e7eb;          /* texte clair */
-      --muted:#94a3b8;       /* gris doux */
-      --accent:#d4af37;      /* or chic */
-      --glacier:#8ecae6;     /* bleu glacier */
-      --wine:#8b183a;        /* rouge vin */
-      --ok:#10b981;          /* vert ok */
-      --warn:#f59e0b;        /* amber */
+      --bg:#0a0e14; --fg:#e7edf3; --muted:#9fb0c3; --accent:#d4af37; --ice:#8ecae6; --wine:#7a213a; --panel:#0f172a; --ok:#20d08a; --warn:#f59e0b;
     }
-    html,body{height:100%;}
-    body{
-      margin:0; background:radial-gradient(1200px 600px at 70% -10%, rgba(212,175,55,.08), transparent 60%), var(--bg);
-      color:var(--fg); font:15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
-      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-    }
-    header{
-      position:fixed; inset:0 0 auto 0; height:56px; display:flex; align-items:center; gap:12px; padding:8px 14px; z-index:10;
-      background:linear-gradient(to bottom, rgba(11,15,20,.9), rgba(11,15,20,.6)); backdrop-filter: blur(6px);
-      border-bottom:1px solid rgba(212,175,55,.15);
-      font-size:14px;
-    }
-    header .brand{display:flex; align-items:center; gap:8px; font-weight:800; letter-spacing:.2px;}
-    header .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 20px rgba(212,175,55,.5)}
-    header small{color:var(--muted)}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:
+      radial-gradient(1000px 500px at 100% -20%, rgba(212,175,55,.08), transparent 60%),
+      linear-gradient(180deg, #0a0e14, #0a0e14 60%, #0c1118);
+      color:var(--fg);font:16px/1.55 system-ui,-apple-system,Segoe UI,Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    header{position:sticky;top:0;z-index:20;background:rgba(10,14,20,.7);backdrop-filter:blur(8px);border-bottom:1px solid rgba(212,175,55,.18)}
+    .nav{display:flex;align-items:center;gap:14px;padding:12px 18px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px rgba(212,175,55,.6)}
+    .spacer{flex:1}
+    .nav a{padding:8px 10px;border-radius:10px;color:var(--muted);text-decoration:none;border:1px solid transparent}
+    .nav a:hover{border-color:rgba(212,175,55,.3);color:#fff}
 
-    .progress{flex:1; height:4px; background:#0b1220; border-radius:999px; overflow:hidden;}
-    .progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--glacier));transition:width .35s ease;}
+    .hero{display:grid;gap:18px;grid-template-columns:1.2fr .8fr;align-items:center;padding:40px 18px 22px}
+    .kicker{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(212,175,55,.4);color:var(--accent);border-radius:999px;padding:6px 12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;font-size:12px}
+    h1{font-size:clamp(28px,5vw,56px);line-height:1.1;margin:.2rem 0 .6rem}
+    .lead{color:var(--muted);font-size:clamp(16px,2.4vw,20px)}
+    .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{border:1px solid rgba(212,175,55,.45);background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));color:#fff;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
+    .btn.ghost{border-color:rgba(158,175,200,.35);color:var(--muted)}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid rgba(158,175,200,.2);border-radius:16px;padding:14px;box-shadow:0 10px 28px rgba(0,0,0,.35)}
 
-    main{height:100%; display:grid; place-items:center; padding:64px 12px 84px;}
-    .deck{width:100%; max-width:1100px; min-height:60vh; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00)); border:1px solid rgba(148,163,184,.15); border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04); position:relative; overflow:hidden;}
-    .slide{position:absolute; inset:0; padding:20px; display:flex; flex-direction:column; gap:14px; opacity:0; transform:translateX(20px) scale(.98); transition:.45s cubic-bezier(.2,.7,.2,1); overflow:auto;}
-    .slide.active{opacity:1; transform:none;}
-    .h1{font-size: clamp(22px, 5vw, 40px); line-height:1.2; font-weight:900; letter-spacing:.2px;}
-    .h2{font-size: clamp(18px, 3.5vw, 26px); font-weight:800; color:#e7ecef;}
-    .pill{display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border:1px solid rgba(212,175,55,.35); color:var(--accent); border-radius:999px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; font-size:11px;}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:10px}
+    .stat{background:rgba(255,255,255,.03);border:1px solid rgba(158,175,200,.22);border-radius:14px;padding:12px}
+    .stat b{font-size:clamp(18px,3.2vw,28px)}
     .muted{color:var(--muted)}
 
-    .grid{display:grid; gap:12px;}
-    .grid.cols-2{grid-template-columns: repeat(auto-fit, minmax(220px,1fr));} 
-    .grid.cols-3{grid-template-columns: repeat(auto-fit, minmax(200px,1fr));} 
-    .grid.cols-4{grid-template-columns: repeat(auto-fit, minmax(180px,1fr));} 
+    /* Sections */
+    section{padding:36px 18px}
+    h2{font-size:clamp(22px,3.6vw,34px);margin:.2rem 0 .8rem}
+    .grid{display:grid;gap:14px}
+    .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border:1px solid rgba(148,163,184,.18); border-radius:16px; padding:14px; box-shadow:0 8px 24px rgba(0,0,0,.25);}
-    .card h3{margin:.2rem 0 .4rem; font-size: clamp(15px, 2vw, 18px);}
-    .card p{margin:.25rem 0; color:var(--muted)}
+    .timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .tcol{border:1px solid rgba(158,175,200,.22);border-radius:14px;padding:12px;background:rgba(255,255,255,.02)}
+    .tcol h4{margin:.3rem 0;font-size:14px;color:#eaf2f9;text-transform:uppercase;letter-spacing:.4px}
+    .task{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding:6px 0}
+    .task input{width:18px;height:18px}
 
-    .badge{display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border-radius:999px;font-weight:700;font-size:12px}
-    .badge.gold{background:rgba(212,175,55,.12); color:var(--accent); border:1px solid rgba(212,175,55,.35)}
-    .badge.ice{background:rgba(142,202,230,.12); color:var(--glacier); border:1px solid rgba(142,202,230,.35)}
+    .manifest{font-size:18px;line-height:1.6}
+    blockquote{margin:0;padding:14px 16px;border-left:3px solid var(--accent);background:rgba(212,175,55,.08);border-radius:10px}
 
-    ul.clean{list-style:none; padding-left:0; margin:0}
-    ul.clean li{padding:6px 0; display:flex; gap:8px; align-items:flex-start;}
-    ul.clean li i{margin-top:4px; width:7px; height:7px; border-radius:2px; background:linear-gradient(90deg,var(--accent),var(--glacier)); flex:0 0 7px; box-shadow:0 0 10px rgba(212,175,55,.5)}
+    .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .ph{aspect-ratio:1/1;background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px dashed rgba(158,175,200,.35);border-radius:12px;display:grid;place-items:center;color:var(--muted);font-weight:700}
 
-    /* Timeline */
-    .timeline{display:grid; gap:10px; grid-template-columns:repeat(auto-fit, minmax(180px,1fr));}
-    .timeline .col{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border:1px solid rgba(148,163,184,.18); border-radius:12px; padding:10px;}
-    .timeline h4{margin:.3rem 0; font-size:14px}
-    .task{display:grid; grid-template-columns:auto 1fr; gap:8px; align-items:start; padding:4px 0;}
-    .task input[type="checkbox"]{margin-top:3px; width:16px; height:16px}
-    .task small{color:var(--muted)}
+    footer{padding:32px 18px;border-top:1px solid rgba(212,175,55,.18);margin-top:28px;color:var(--muted)}
 
-    /* Footer nav */
-    .nav{position:fixed; inset:auto 0 10px 0; display:flex; justify-content:center; gap:10px; z-index:20; flex-wrap:wrap;}
-    .nav button{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); color:var(--fg); border:1px solid rgba(148,163,184,.2); border-radius:12px; padding:10px 12px; font-weight:700; letter-spacing:.3px; cursor:pointer; backdrop-filter: blur(6px); font-size:14px} 
-    .nav button:hover{border-color:rgba(212,175,55,.4)}
+    /* Countdown */
+    .count{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{border:1px solid rgba(212,175,55,.35);border-radius:12px;padding:10px 12px;min-width:92px;text-align:center}
+    .chip b{display:block;font-size:22px}
 
-    .toolbar{position:absolute; inset:auto 10px 10px auto; display:flex; flex-wrap:wrap; gap:6px}
-    .toolbar .chip{background:rgba(255,255,255,.06); border:1px solid rgba(148,163,184,.2); padding:4px 8px; border-radius:999px; color:var(--muted); font-weight:600; font-size:11px}
-
-    .inputs{display:flex; flex-wrap:wrap; gap:8px; margin:.3rem 0 0}
-    .inputs input, .inputs select, .inputs button{background:#0b1220; color:var(--fg); border:1px solid rgba(148,163,184,.25); border-radius:8px; padding:6px 8px; font-weight:600; font-size:14px; flex:1; min-width:120px}
-    .inputs button{cursor:pointer; flex:unset}
-
-    @media(max-width:640px){
-      header{font-size:12px; height:48px}
-      .h1{font-size: clamp(18px, 6vw, 28px);}
-      main{padding:56px 8px 76px;}
-      .deck{border-radius:12px;}
-      .slide{padding:16px; gap:10px}
-      .card{padding:10px;}
-      .card h3{font-size:14px}
-      .nav button{padding:8px 10px; font-size:13px}
+    /* Responsive */
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(3,1fr)}
+      .timeline{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(2,1fr)}
     }
-
-    /* Print */
-    @media print{
-      header,.nav,.toolbar{display:none !important}
-      body{background:#fff; color:#111}
-      .deck{width:100%; min-height:auto; box-shadow:none; border:none}
-      .slide{position:relative; opacity:1; transform:none; page-break-after:always}
+    @media(max-width:640px){
+      header .nav{padding:10px}
+      .nav a{padding:6px 8px}
+      .stats{grid-template-columns:1fr 1fr}
+      .timeline{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr}
+      section{padding:28px 14px}
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand"><span class="dot"></span><div>PlayK × La Bergerie — <small class="muted">Réunion Kick‑off</small></div></div>
-    <div class="progress" aria-hidden="true"><i id="progress"></i></div>
-    <div class="muted" id="today"></div>
+    <div class="wrap nav">
+      <div class="brand"><span class="dot"></span> PlayK — Lancement</div>
+      <div class="spacer"></div>
+      <a href="#manifeste">Manifeste</a>
+      <a href="#calendrier">Calendrier</a>
+      <a href="#collection">Collection</a>
+      <a href="#medias">Médias</a>
+      <a href="#contact">Contact</a>
+    </div>
   </header>
 
-  <main>
-    <div class="deck" role="region" aria-label="Deck de présentation">
-      <!-- SLIDE 1: Titre -->
-      <section class="slide active" data-slide="1">
-        <span class="pill">Présentation interactive</span>
-        <div class="h1">PlayK × La Bergerie<br><span class="muted">Kick‑off & plan d’action</span></div>
-        <div class="grid cols-2">
-          <div class="card">
-            <h3>Objectif de la session</h3>
-            <ul class="clean">
-              <li><i></i><span>Aligner la vision et les attentes.</span></li>
-              <li><i></i><span>Proposer une répartition des rôles.</span></li>
-              <li><i></i><span>Valider un calendrier réaliste et ambitieux.</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Mode d’emploi</h3>
-            <ul class="clean">
-              <li><i></i><span>Navigation <b>← / →</b> ou clic sur <b>Suivant</b>.</span></li>
-              <li><i></i><span>Champs interactifs : noms, dates, cases à cocher.</span></li>
-              <li><i></i><span><b>Imprimer</b> via <code>Ctrl/Cmd + P</code> (format A4, 1 slide/page).</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="toolbar">
-          <span class="chip">Astuce : Espace = slide suivante</span>
-        </div>
-      </section>
-
-      <!-- SLIDE 2: Vision -->
-      <section class="slide" data-slide="2">
-        <span class="pill">Vision</span>
-        <div class="h1">PlayK n’est pas un jouet<br><span class="muted">Une œuvre pop/street art pour un lieu chic de montagne</span></div>
-        <div class="grid cols-3">
-          <div class="card"><span class="badge gold">Fer de lance</span>
-            <h3>La Bergerie = vitrine</h3>
-            <p>Première installation réelle → rampe de lancement pour la marque.</p>
-          </div>
-          <div class="card"><span class="badge ice">Collection</span>
-            <h3>Œuvres individuelles + 1 pièce commune</h3>
-            <p>Chaque membre termine 1 PlayK + réalisation collective La Bergerie.</p>
-          </div>
-          <div class="card"><span class="badge gold">Qualité</span>
-            <h3>Exigence & cohérence</h3>
-            <p>Matériaux, finitions, images et récit au niveau « chic/luxe ».</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 3: Objectifs communs -->
-      <section class="slide" data-slide="3">
-        <span class="pill">Objectifs proposés</span>
-        <div class="h1">Ce qu’on vise d’ici 4 semaines</div>
-        <ul class="clean">
-          <li><i></i><span><b>PlayK La Bergerie</b> : design final + réalisation physique (création commune).</span></li>
-          <li><i></i><span><b>4 PlayK individuels</b> terminés (1 par personne) → mini‑collection prête à présenter.</span></li>
-          <li><i></i><span><b>Landing page</b> dédiée + visuels pro (photos) + <b>3 teasers vidéo</b>.</span></li>
-          <li><i></i><span><b>Lancement</b> réseaux coordonné (Insta/TikTok) + communication locale.</span></li>
-        </ul>
-      </section>
-
-      <!-- SLIDE 4: Rôles (interactif) -->
-      <section class="slide" data-slide="4">
-        <span class="pill">Répartition — proposition</span>
-        <div class="h1">Rôles à tenir<br><span class="muted">(à confirmer ensemble)</span></div>
-        <div class="card">
-          <b>Équipe (noms)</b>
-          <div class="inputs" id="teamInputs">
-            <input placeholder="Membre 1" />
-            <input placeholder="Membre 2" />
-            <input placeholder="Membre 3" />
-            <input placeholder="Membre 4" />
-            <button id="saveTeam">Enregistrer</button>
-          </div>
-          <small class="muted">Astuce : entre les noms, puis « Enregistrer » pour activer les listes ci‑dessous.</small>
-        </div>
-        <div class="grid cols-2" style="margin-top:10px">
-          <div class="card">
-            <h3>Site & partenaires</h3>
-            <p>Landing page, suivi La Bergerie, relation lieu/presses.</p>
-            <div class="inputs"><label>Responsable
-              <select class="owner"></select></label></div>
-          </div>
-          <div class="card">
-            <h3>Photo / Vidéo</h3>
-            <p>Teasers, making‑of, photos officielles, qualité d’image.</p>
-            <div class="inputs"><label>Responsable
-              <select class="owner"></select></label></div>
-          </div>
-          <div class="card">
-            <h3>Réseaux sociaux</h3>
-            <p>Planning éditorial, posts & stories, communauté.</p>
-            <div class="inputs"><label>Responsable
-              <select class="owner"></select></label></div>
-          </div>
-          <div class="card">
-            <h3>Direction artistique</h3>
-            <p>Logos, slogans, motifs montagne, cohérence visuelle.</p>
-            <div class="inputs"><label>Responsable
-              <select class="owner"></select></label></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 5: Calendrier (interactif) -->
-      <section class="slide" data-slide="5">
-        <span class="pill">Calendrier — proposition</span>
-        <div class="h1">Feuille de route 4 semaines</div>
-        <div class="card">
-          <div class="inputs">
-            <label>Début (lundi)
-              <input type="date" id="startDate" />
-            </label>
-            <button id="todayBtn">Aujourd’hui</button>
-            <small class="muted">Les échéances ci‑dessous se recalculent automatiquement.</small>
-          </div>
-        </div>
-        <div class="timeline" style="margin-top:10px">
-          <div class="col">
-            <h4>Semaine 1 — <span class="muted" id="w1"></span></h4>
-            <label class="task"><input type="checkbox" data-task="choose-variant"><span>Choisir la variante finale <b>PlayK La Bergerie</b>.</span></label>
-            <label class="task"><input type="checkbox" data-task="roles"><span>Répartir les rôles et responsabilités.</span></label>
-            <label class="task"><input type="checkbox" data-task="landing"><span>Créer la <b>landing page</b> (version simple).</span></label>
-          </div>
-          <div class="col">
-            <h4>Semaines 2–3 — <span class="muted" id="w23"></span></h4>
-            <label class="task"><input type="checkbox" data-task="build-bergerie"><span>Réaliser physiquement <b>PlayK La Bergerie</b>.</span></label>
-            <label class="task"><input type="checkbox" data-task="personal"><span>Avancer les <b>PlayK individuels</b> (1 par personne).</span></label>
-            <label class="task"><input type="checkbox" data-task="teasers"><span>Produire <b>3 teasers vidéo</b> (making‑of, détails, reveal).</span></label>
-          </div>
-          <div class="col">
-            <h4>Semaine 4 — <span class="muted" id="w4"></span></h4>
-            <label class="task"><input type="checkbox" data-task="collection"><span>Avoir <b>5 PlayK prêts</b> : 4 individuels + 1 collectif.</span></label>
-            <label class="task"><input type="checkbox" data-task="launch"><span>Lancement réseaux coordonné + mise en ligne page.</span></label>
-            <label class="task"><input type="checkbox" data-task="local"><span>Com’ locale : La Bergerie / presse / bouche‑à‑oreille.</span></label>
-          </div>
-          <div class="col">
-            <h4>Mois 2 — <span class="muted" id="m2"></span></h4>
-            <label class="task"><input type="checkbox" data-task="shooting"><span>Shooting photo & vidéo <b>sur place</b>.</span></label>
-            <label class="task"><input type="checkbox" data-task="campaign"><span>Campagne réseaux coordonnée (stories, reels, collabs).</span></label>
-            <label class="task"><input type="checkbox" data-task="next"><span>Définir la <b>prochaine série</b> (nouveau lieu/collection).</span></label>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 6: Livrables -->
-      <section class="slide" data-slide="6">
-        <span class="pill">Livrables</span>
-        <div class="h1">Ce qu’on livre au lancement</div>
-        <div class="grid cols-3">
-          <div class="card"><h3>Pièces</h3>
-            <ul class="clean">
-              <li><i></i><span><b>PlayK La Bergerie</b> (réalisation commune)</span></li>
-              <li><i></i><span><b>4 PlayK individuels</b> (collection)</span></li>
-            </ul>
-          </div>
-          <div class="card"><h3>Contenus</h3>
-            <ul class="clean">
-              <li><i></i><span>3 <b>teasers vidéo</b> + 1 reveal</span></li>
-              <li><i></i><span>10 photos pro (pack presse + réseaux)</span></li>
-            </ul>
-          </div>
-          <div class="card"><h3>Digital</h3>
-            <ul class="clean">
-              <li><i></i><span>Landing page <b>PlayK × La Bergerie</b></span></li>
-              <li><i></i><span>Calendrier éditorial réseaux (2 semaines)</span></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 7: Facteurs clés -->
-      <section class="slide" data-slide="7">
-        <span class="pill">Facteurs de succès</span>
-        <div class="h1">Ce qui fera la différence</div>
-        <ul class="clean">
-          <li><i></i><span><b>Discipline</b> : un jalon tenu par personne, chaque semaine.</span></li>
-          <li><i></i><span><b>Qualité</b> : finitions, images, tonalité “chic/luxe”.</span></li>
-          <li><i></i><span><b>Storytelling</b> : une histoire claire (rebelle mais élégante).</span></li>
-          <li><i></i><span><b>Visibilité</b> : teasing régulier, reveal maîtrisé, relais local.</span></li>
-        </ul>
-      </section>
-
-      <!-- SLIDE 8: Prochaines actions -->
-      <section class="slide" data-slide="8">
-        <span class="pill">Clôture</span>
-        <div class="h1">Ce qu’on décide maintenant</div>
-        <div class="grid cols-2">
-          <div class="card">
-            <h3>Décisions</h3>
-            <ul class="clean">
-              <li><i></i><span>Variante finale PlayK La Bergerie.</span></li>
-              <li><i></i><span>Rôles & responsables.</span></li>
-              <li><i></i><span>Dates clés (S1, S2–3, S4).</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Actions immédiates</h3>
-            <ul class="clean">
-              <li><i></i><span>Lancer la landing page (brouillon).</span></li>
-              <li><i></i><span>Planifier les 3 teasers (scènes, durée, équipe).</span></li>
-              <li><i></i><span>Checklist perso : état d’avancement de chaque PlayK.</span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="toolbar">
-          <span class="chip">Imprimer → Ctrl/Cmd + P</span>
-        </div>
-      </section>
-
+  <div class="wrap hero">
+    <div>
+      <span class="kicker">Reveal Décembre — La Bergerie</span>
+      <h1>PlayK n’est pas un jouet.<br> C’est notre manifeste.</h1>
+      <p class="lead">Première installation <b>PlayK × La Bergerie</b> cet hiver. Une œuvre collective, une collection de pièces uniques, et une histoire : <i>un phénomène en route</i>.</p>
+      <div class="cta">
+        <button class="btn" id="btnNotify">S’abonner au reveal</button>
+        <button class="btn ghost" id="btnPress">Dossier presse</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="muted">PlayK prêts</div><b id="countReady">2 / 6</b></div>
+        <div class="stat"><div class="muted">Deadline œuvre</div><b>15 nov.</b></div>
+        <div class="stat"><div class="muted">Reveal</div><b>Début déc.</b></div>
+      </div>
     </div>
-  </main>
-
-  <div class="nav" aria-label="Contrôles">
-    <button id="prev" aria-label="Précédent">← Précédent</button>
-    <button id="next" aria-label="Suivant">Suivant →</button>
+    <div class="panel">
+      <div class="muted" style="margin-bottom:6px">Compte à rebours</div>
+      <div class="count" id="countdown">
+        <div class="chip"><b id="d">--</b>jours</div>
+        <div class="chip"><b id="h">--</b>heures</div>
+        <div class="chip"><b id="m">--</b>min</div>
+        <div class="chip"><b id="s">--</b>s</div>
+      </div>
+    </div>
   </div>
+
+  <section id="manifeste" class="wrap">
+    <h2>Manifeste PlayK</h2>
+    <div class="grid cols-2">
+      <div>
+        <p class="manifest">PlayK n’est pas un jouet. C’est une figure de notre enfance qui a grandi — libre, rebelle, sincère. À La Bergerie, il devient sculpture : un langage d’adulte, un signe de ralliement, un miroir tendu à nos hypocrisies. <br><br>Nous revendiquons l’idéal de l’enfance — l’imaginaire, la justice, l’audace. Nous refusons le cynisme. Et nous lançons une collection qui affirme : <b>on peut encore rêver et ré‑inventer</b>.</p>
+        <blockquote>Un phénomène en route. <br><b>PlayK</b> — Not a toy.</blockquote>
+      </div>
+      <div class="panel">
+        <b>Éléments d’identité</b>
+        <ul class="task" style="margin-top:8px">
+          <input type="checkbox" id="chkLogo"> <label for="chkLogo">Logo PlayK finalisé</label>
+        </ul>
+        <ul class="task">
+          <input type="checkbox" id="chkMark"> <label for="chkMark">Dépôt de marque</label>
+        </ul>
+        <ul class="task">
+          <input type="checkbox" id="chkQR"> <label for="chkQR">QR codes & fiches d’authentification</label>
+        </ul>
+        <ul class="task">
+          <input type="checkbox" id="chkPlaque"> <label for="chkPlaque">Plaque / socle gravé La Bergerie</label>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="calendrier" class="wrap">
+    <h2>Calendrier (jalons)</h2>
+    <div class="timeline">
+      <div class="tcol">
+        <h4>Jusqu’au 30 sept.</h4>
+        <label class="task"><input type="checkbox"> Camille — PlayK #1 terminé</label>
+        <label class="task"><input type="checkbox"> Elena — PlayK #1 terminé</label>
+        <label class="task"><input type="checkbox"> William — PlayK #1 terminé</label>
+      </div>
+      <div class="tcol">
+        <h4>Sept. – Oct.</h4>
+        <label class="task"><input type="checkbox"> Landing page en ligne</label>
+        <label class="task"><input type="checkbox"> Comptes TikTok / Insta / FB / (YouTube)</label>
+        <label class="task"><input type="checkbox"> Tournage & montages vidéos</label>
+        <label class="task"><input type="checkbox"> Shooting photos collection</label>
+      </div>
+      <div class="tcol">
+        <h4>Avant 15 nov.</h4>
+        <label class="task"><input type="checkbox"> PlayK La Bergerie terminé</label>
+        <label class="task"><input type="checkbox"> Dossier presse prêt</label>
+        <label class="task"><input type="checkbox"> Logistique installation</label>
+      </div>
+      <div class="tcol">
+        <h4>Début déc.</h4>
+        <label class="task"><input type="checkbox"> Reveal & installation</label>
+        <label class="task"><input type="checkbox"> Campagne réseaux coordonnée</label>
+        <label class="task"><input type="checkbox"> Publication manifeste</label>
+      </div>
+    </div>
+  </section>
+
+  <section id="collection" class="wrap">
+    <h2>La collection (6 pièces)</h2>
+    <div class="gallery">
+      <div class="ph">PlayK 01</div>
+      <div class="ph">PlayK 02</div>
+      <div class="ph">PlayK 03</div>
+      <div class="ph">PlayK 04</div>
+      <div class="ph">PlayK 05</div>
+      <div class="ph">PlayK 06</div>
+    </div>
+  </section>
+
+  <section id="medias" class="wrap">
+    <h2>Médias</h2>
+    <div class="grid cols-2">
+      <div class="panel">
+        <b>Teasers vidéo</b>
+        <p class="muted">3 formats courts (making-of, détails, reveal) + 1 vidéo longue option YouTube.</p>
+        <button class="btn" id="btnPlan">Ouvrir le plan de tournage</button>
+      </div>
+      <div class="panel">
+        <b>Dossier presse</b>
+        <p class="muted">Présentation, photos HD, manifeste, bio courte, contacts.</p>
+        <button class="btn ghost" id="btnDL">Télécharger (PDF)</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <h2>Restez informés</h2>
+    <div class="grid cols-2">
+      <form class="panel" id="form">
+        <label>Votre e‑mail<br>
+          <input required type="email" placeholder="prenom@email.com" style="width:100%;padding:10px;border-radius:10px;border:1px solid rgba(158,175,200,.35);background:#0b1220;color:#fff">
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;margin-top:8px">
+          <input type="checkbox"> Recevoir le manifeste PlayK en PDF
+        </label>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="btn" type="submit">S’inscrire</button>
+          <button class="btn ghost" type="button" id="btnInsta">Instagram</button>
+        </div>
+        <small class="muted">Aucun spam. Désinscription en un clic.</small>
+      </form>
+      <div class="panel">
+        <b>Coordonnées</b>
+        <p class="muted">PlayK — Clermont / Super‑Besse<br>Contact : hello@playk.example</p>
+        <b>Partenaires</b>
+        <p class="muted">La Bergerie — Super‑Besse</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    © <span id="year"></span> PlayK. Tous droits réservés — « Not a Toy ».
+  </footer>
 
   <script>
     // Helpers
-    const $ = (sel, ctx=document) => ctx.querySelector(sel);
-    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+    const $ = (s,ctx=document)=>ctx.querySelector(s);
+    const $$ = (s,ctx=document)=>Array.from(ctx.querySelectorAll(s));
 
-    // Slides navigation
-    let idx = 0; // zero-based
-    const slides = $$(".slide");
-    const progress = $("#progress");
-
-    function render(){
-      slides.forEach((s, i)=>{
-        s.classList.toggle('active', i===idx);
-      });
-      const ratio = ((idx+1)/slides.length)*100; progress.style.width = ratio + '%';
-      $("#prev").disabled = idx===0; $("#next").disabled = idx===slides.length-1;
+    // Countdown to Dec 1st (00:00)
+    function tick(){
+      const target = new Date(new Date().getFullYear(), 11, 1, 0,0,0); // Dec=11
+      const now = new Date();
+      // if past Dec 1, set next year
+      if(now>target){ target.setFullYear(target.getFullYear()+1); }
+      const diff = target - now;
+      const d = Math.floor(diff/86400000);
+      const h = Math.floor((diff%86400000)/3600000);
+      const m = Math.floor((diff%3600000)/60000);
+      const s = Math.floor((diff%60000)/1000);
+      $('#d').textContent=d; $('#h').textContent=h; $('#m').textContent=m; $('#s').textContent=s;
+      requestAnimationFrame(()=> setTimeout(tick, 1000));
     }
-    function next(){ if(idx < slides.length-1){ idx++; render(); } }
-    function prev(){ if(idx>0){ idx--; render(); } }
-    $("#next").addEventListener('click', next);
-    $("#prev").addEventListener('click', prev);
-    window.addEventListener('keydown', e=>{
-      if(['ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); next(); }
-      if(['ArrowLeft','PageUp','Backspace'].includes(e.key)) { e.preventDefault(); prev(); }
-    });
-    render();
+    tick();
 
-    // Header date
-    const today = new Date();
-    $("#today").textContent = today.toLocaleDateString('fr-FR', {weekday:'short', day:'2-digit', month:'short'});
-
-    // LocalStorage keys
-    const TEAM_KEY = 'playk_team_v1';
-    const CHECKS_KEY = 'playk_checks_v1';
-    const START_KEY = 'playk_start_v1';
-    const OWNER_KEY = 'playk_owner_v1';
-
-    // Team inputs
-    const teamInputs = $$("#teamInputs input");
-    const saveTeamBtn = $("#saveTeam");
-    const ownerSelects = $$("select.owner");
-
-    function loadTeam(){
-      try{ const data = JSON.parse(localStorage.getItem(TEAM_KEY)||'[]');
-        teamInputs.forEach((inp,i)=> inp.value = data[i]||'');
-        return data;
-      }catch{ return []; }
+    // Collection progress (2/6 → dynamic via checkboxes of timeline Sept items)
+    function updateReady(){
+      const base = 2; // déjà prêts
+      const extras = $$('#calendrier input[type="checkbox"]').slice(0,3).filter(c=>c.checked).length; // Camille/Elena/William
+      const total = base + extras;
+      $('#countReady').textContent = `${total} / 6`;
     }
-    function saveTeam(){
-      const data = teamInputs.map(i=> i.value.trim()).filter(Boolean);
-      localStorage.setItem(TEAM_KEY, JSON.stringify(data));
-      applyOwners(data);
-    }
-    function applyOwners(list){
-      ownerSelects.forEach(sel=>{
-        sel.innerHTML = '<option value="">(à attribuer)</option>' + list.map(n=>`<option>${n}</option>`).join('');
-        const saved = sel.getAttribute('data-owner') || '';
-        if(saved) sel.value = saved;
-      });
-    }
-    saveTeamBtn.addEventListener('click', saveTeam);
-    const initTeam = loadTeam();
-    applyOwners(initTeam);
+    $$('#calendrier input[type="checkbox"]').forEach(c=> c.addEventListener('change', updateReady));
+    updateReady();
 
-    // Persist owner choices
-    ownerSelects.forEach(sel=>{
-      sel.addEventListener('change', ()=>{
-        sel.setAttribute('data-owner', sel.value);
-        const all = ownerSelects.map(s=> s.getAttribute('data-owner')||'');
-        localStorage.setItem(OWNER_KEY, JSON.stringify(all));
-      });
-    });
-    try{
-      const owners = JSON.parse(localStorage.getItem(OWNER_KEY)||'[]');
-      owners.forEach((v,i)=>{ if(ownerSelects[i]) ownerSelects[i].setAttribute('data-owner', v); });
-      ownerSelects.forEach((sel,i)=>{ const v = owners[i]; if(v) sel.value = v; });
-    }catch{}
+    // Footer year
+    $('#year').textContent = new Date().getFullYear();
 
-    // Checklist persistence
-    const checks = $$('input[type="checkbox"][data-task]');
-    function loadChecks(){
-      try{ const map = JSON.parse(localStorage.getItem(CHECKS_KEY)||'{}');
-        checks.forEach(c=> c.checked = !!map[c.dataset.task]);
-      }catch{}
-    }
-    function saveChecks(){
-      const map = {}; checks.forEach(c=> map[c.dataset.task] = c.checked);
-      localStorage.setItem(CHECKS_KEY, JSON.stringify(map));
-    }
-    checks.forEach(c=> c.addEventListener('change', saveChecks));
-    loadChecks();
+    // CTA placeholders
+    $('#btnNotify').addEventListener('click', ()=> alert('Super ! Nous te préviendrons pour le reveal.'));
+    $('#btnPress').addEventListener('click', ()=> alert('Le dossier presse sera disponible ici (PDF).'));
+    $('#btnPlan').addEventListener('click', ()=> alert('Plan de tournage : scènes, lieux, équipe — à intégrer.'));
+    $('#btnDL').addEventListener('click', ()=> alert('Téléchargement du PDF presse — bientôt.'));
+    $('#btnInsta').addEventListener('click', ()=> alert('Ouvrir Instagram PlayK — lien à définir.'));
 
-    // Start date → compute ranges
-    const startInput = $("#startDate");
-    const w1 = $("#w1"), w23 = $("#w23"), w4 = $("#w4"), m2 = $("#m2");
-
-    function fmt(d){ return d.toLocaleDateString('fr-FR', {day:'2-digit', month:'short'}); }
-    function addDays(d, n){ const x = new Date(d); x.setDate(x.getDate()+n); return x; }
-
-    function computeRanges(){
-      const val = startInput.value; if(!val){ w1.textContent='(date à définir)'; w23.textContent=''; w4.textContent=''; m2.textContent=''; return; }
-      const start = new Date(val+'T00:00:00');
-      const endW1 = addDays(start, 6);
-      const startW23 = addDays(start, 7);
-      const endW23 = addDays(start, 20);
-      const startW4 = addDays(start, 21);
-      const endW4 = addDays(start, 27);
-      const startM2 = addDays(start, 28);
-      const endM2 = addDays(start, 55);
-      w1.textContent = fmt(start)+ ' → ' + fmt(endW1);
-      w23.textContent = fmt(startW23)+ ' → ' + fmt(endW23);
-      w4.textContent = fmt(startW4)+ ' → ' + fmt(endW4);
-      m2.textContent = fmt(startM2)+ ' → ' + fmt(endM2);
-      localStorage.setItem(START_KEY, startInput.value);
-    }
-
-    const todayBtn = $("#todayBtn");
-    todayBtn.addEventListener('click', ()=>{
-      const d = new Date();
-      const day = d.getDay(); // 0=Sun..6=Sat
-      const diff = (day===0? -6 : 1 - day); // back to Monday
-      d.setDate(d.getDate()+diff);
-      startInput.value = d.toISOString().slice(0,10);
-      computeRanges();
-    });
-
-    const savedStart = localStorage.getItem(START_KEY);
-    if(savedStart){ startInput.value = savedStart; computeRanges(); }
-
-    startInput.addEventListener('change', computeRanges);
+    // Persist identity checkboxes
+    ['chkLogo','chkMark','chkQR','chkPlaque'].forEach(id=>{
+      const n = document.getElementById(id);
+      const key = 'playk_'+id;
+      try{ n.checked = localStorage.getItem(key)==='1'; }catch{}
+      n.addEventListener('change', ()=>{
+        localStorage.setItem(key, n.checked?'1':'0');
+      })
+    })
   </script>
 </body>
 </html>
